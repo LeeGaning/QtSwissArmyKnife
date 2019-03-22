@@ -35,9 +35,6 @@ SOURCES += \
     src/SAKApplication.cpp \
     src/ui/MainWindow.cpp
 
-RESOURCES += \
-    SAKResource.qrc
-
 INCLUDEPATH += \
     src \
     src/ui
