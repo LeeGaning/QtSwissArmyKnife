@@ -179,6 +179,3 @@ FORMS   += \
     src/TabPageUdpClient/UdpSAKIODeviceControler.ui
 INCLUDEPATH += \
     src/TabPageUdpClient
-
-DISTFILES += \
-    other/update.json
