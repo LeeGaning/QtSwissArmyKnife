@@ -6,19 +6,17 @@
 *
 * Copyright (C) 2018-2018 wuhai persionnal. All rights reserved.
 *******************************************************************************/
-#ifndef UDPSAKIODEVICEWIDGET_H
-#define UDPSAKIODEVICEWIDGET_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include "SAKIODeviceWidget.h"
-#include "UdpSAKIODevice.h"
-#include "UdpSAKIODeviceControler.h"
+#include <QMainWindow>
 
-class UdpSAKIODeviceWidget : public SAKIODeviceWidget
+class MainWindow:public QMainWindow
 {
     Q_OBJECT
 public:
-    UdpSAKIODeviceWidget(SAKIODevice *_device, SAKIODeviceControler *_controler, QWidget *parent = Q_NULLPTR);
-    ~UdpSAKIODeviceWidget();
+    MainWindow(QWidget* parent = nullptr);
+
 };
 
 #endif

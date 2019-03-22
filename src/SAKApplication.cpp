@@ -15,26 +15,26 @@
 #include <QDebug>
 #include <QSettings>
 
-SAKApplication::SAKApplication(int argc, char **argv):
-    QApplication(argc, argv)
-{
-    /// 注册表选项
-    setOrganizationName(QString("Qter"));
-    setOrganizationDomain(QString("IT"));
-    setApplicationName(QString("QtSwissArmyKnife"));
-#if 1
-    QSettings settings;
-    QString style = settings.value(QString(MainWindow::appStyle())).toString();
-    if (!style.isEmpty()){
-        QApplication::setStyle(QStyleFactory::create(style));
-    }
-#endif
+#include "MainWindow.h"
 
-    mpMainWindow = new MainWindow;
-    mpMainWindow->show();
+SAKApplication::SAKApplication(int argc, char **argv)
+    :QApplication(argc, argv)
+    ,mainWindow(nullptr)
+{
+
+    installUI();
 }
 
 SAKApplication::~SAKApplication()
 {
 
+}
+
+void SAKApplication::installUI()
+{
+    mainWindow = new MainWindow;
+#ifndef Q_OS_ANDROID
+    mainWindow->resize(1024, 768);
+#endif
+    mainWindow->show();
 }
