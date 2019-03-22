@@ -11,6 +11,7 @@
 
 #include <QApplication>
 #include <QStyleFactory>
+#include <QQmlApplicationEngine>
 
 class MainWindow;
 
@@ -21,8 +22,7 @@ public:
     SAKApplication(int argc, char **argv);
     ~SAKApplication();
 private:
-    MainWindow* mainWindow;
-
+    QQmlApplicationEngine qmlAppEngine;
 private:
     void installUI();
 };

@@ -4,9 +4,9 @@
 #
 #-------------------------------------------------
 
-QT += core gui xml
+QT += core gui xml widgets network quickcontrols2 quickwidgets
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets network
+!greaterThan(QT_MAJOR_VERSION, 4): error("Not supported Qt version!")
 
 # 软件版本号
 #DEFINES += SAK_VERSION=\"\\\"2.0.0\\\"\"
@@ -27,25 +27,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    src/SAKApplication.h \
-    src/ui/MainWindow.h
+    src/SAKApplication.h
 
 SOURCES += \
     src/main.cpp \
-    src/SAKApplication.cpp \
-    src/ui/MainWindow.cpp
+    src/SAKApplication.cpp
 
 INCLUDEPATH += \
     src \
     src/ui
 
-win32{
+win32 {
     RC_ICONS = window.ico
 }
 
 # 静态编译版本不需要部署发布（静态编译时，禁用下面的）
 DEFINES += NOT_USING_STATIC_EDITION
-
 # 编译后不发布部署(发布时采用静态版本进行Qt进行编译)
 #win32{
 #    contains(DEFINES, NOT_USING_STATIC_EDITION){

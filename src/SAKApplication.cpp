@@ -14,12 +14,10 @@
 
 #include <QDebug>
 #include <QSettings>
-
-#include "MainWindow.h"
+#include <QQuickStyle>
 
 SAKApplication::SAKApplication(int argc, char **argv)
     :QApplication(argc, argv)
-    ,mainWindow(nullptr)
 {
 
     installUI();
@@ -32,9 +30,8 @@ SAKApplication::~SAKApplication()
 
 void SAKApplication::installUI()
 {
-    mainWindow = new MainWindow;
-#ifndef Q_OS_ANDROID
-    mainWindow->resize(1024, 768);
-#endif
-    mainWindow->show();
+    qDebug() << QQuickStyle::availableStyles();
+    QQuickStyle::setStyle("Material");
+
+    qmlAppEngine.load(QUrl("qrc:/qml/MainWindow.qml"));
 }
