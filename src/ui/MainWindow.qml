@@ -28,7 +28,6 @@ ApplicationWindow {
                     model: _toolBarController.devices
 
                     ToolButton {
-                        width: 64
                         height: 64
                         text: _toolButtonController.title
                         icon.source: _toolButtonController.iconUrl
@@ -53,7 +52,6 @@ ApplicationWindow {
                     model: _toolBarController.others
 
                     ToolButton {
-                        width: 64
                         height: 64
                         text: _toolButtonController.title
                         icon.source: _toolButtonController.iconUrl
