@@ -11,15 +11,32 @@
 #endif
 
 #include "SAKApplication.h"
+#include "SAKToolBar.h"
+#include "SAKToolButton.h"
 
 #include <QDebug>
 #include <QSettings>
 #include <QQuickStyle>
 
+QObject* applicationInstance(QQmlEngine* qmlEngine, QJSEngine* jsEngine)
+{
+    Q_UNUSED(jsEngine);
+
+    qmlEngine->setObjectOwnership(sakApp(), QQmlEngine::CppOwnership);
+    return sakApp();
+}
+
+SAKApplication* sakApp(){return SAKApplication::instance();}
+
+SAKApplication* SAKApplication::_app = nullptr;
 SAKApplication::SAKApplication(int argc, char **argv)
     :QApplication(argc, argv)
+    ,toolBar(nullptr)
 {
-
+    _app = this;
+    toolBar = new SAKToolBar(this);
+    registerQmlType();
+    /// --------------------------------------
     installUI();
 }
 
@@ -34,4 +51,12 @@ void SAKApplication::installUI()
     QQuickStyle::setStyle("Material");
 
     qmlAppEngine.load(QUrl("qrc:/qml/MainWindow.qml"));
+}
+
+void SAKApplication::registerQmlType()
+{
+    qmlRegisterSingletonType<SAKApplication>    ("SAK.Controls", 1, 0, "SAKApp", applicationInstance);
+
+    qmlRegisterUncreatableType<SAKToolBar>      ("SAK.Controls", 1, 0, "ToolBarController", "Can not create the qml type that named SAKToolBar");
+    qmlRegisterUncreatableType<SAKToolButton>   ("SAK.Controls", 1, 0, "ToolButtonController", "Can not create the qml type that named SAKToolButton");
 }

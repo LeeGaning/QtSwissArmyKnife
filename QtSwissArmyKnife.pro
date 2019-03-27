@@ -27,11 +27,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    src/SAKApplication.h
+    src/SAKApplication.h \
+    src/SAKToolBar.h \
+    src/SAKToolButton.h \
+    src/SAKGlobal.h
 
 SOURCES += \
     src/main.cpp \
-    src/SAKApplication.cpp
+    src/SAKApplication.cpp \
+    src/SAKToolBar.cpp \
+    src/SAKToolButton.cpp \
+    src/SAKGlobal.cpp
 
 INCLUDEPATH += \
     src \
@@ -67,3 +73,18 @@ UI_DIR      = $$OUT_PWD/ui
 
 RESOURCES += \
     SAKResource.qrc
+
+DISTFILES += \
+    android/AndroidManifest.xml \
+    android/AndroidManifest.xml \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradlew \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew.bat
+
+contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/android
+}

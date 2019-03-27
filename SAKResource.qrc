@@ -1,6 +1,13 @@
 <RCC>
     <qresource prefix="/images">
         <file alias="window.ico">resource/images/window.ico</file>
+        <file alias="bluetooth.png">resource/images/bluetooth.png</file>
+        <file alias="net.png">resource/images/net.png</file>
+        <file alias="serialport.png">resource/images/serialport.png</file>
+        <file alias="server.png">resource/images/server.png</file>
+        <file alias="setting.png">resource/images/setting.png</file>
+        <file alias="tool.png">resource/images/tool.png</file>
+        <file alias="about.png">resource/images/about.png</file>
     </qresource>
     <qresource prefix="/qml">
         <file alias="MainWindow.qml">src/ui/MainWindow.qml</file>

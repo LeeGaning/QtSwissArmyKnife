@@ -13,7 +13,7 @@
 #include <QStyleFactory>
 #include <QQmlApplicationEngine>
 
-class MainWindow;
+class SAKToolBar;
 
 class SAKApplication:public QApplication
 {
@@ -21,10 +21,21 @@ class SAKApplication:public QApplication
 public:
     SAKApplication(int argc, char **argv);
     ~SAKApplication();
+
+    Q_PROPERTY(SAKToolBar*      toolBarController   READ toolBarController CONSTANT)
+
+    static SAKApplication* instance(){return _app;}
 private:
+    static SAKApplication* _app;
+
+    SAKToolBar* toolBar;
+    SAKToolBar* toolBarController(){return toolBar;}
+
     QQmlApplicationEngine qmlAppEngine;
 private:
     void installUI();
+    void registerQmlType();
 };
 
+SAKApplication* sakApp();
 #endif

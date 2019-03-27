@@ -17,6 +17,7 @@
 
 int main(int argc, char *argv[])
 {
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #if 0
     qInstallMessageHandler(SAKAppMsgOutput);
 #endif
