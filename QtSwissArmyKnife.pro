@@ -44,7 +44,7 @@ INCLUDEPATH += \
     src/ui
 
 win32 {
-    RC_ICONS = window.ico
+    RC_ICONS = windows.ico
 }
 
 # 静态编译版本不需要部署发布（静态编译时，禁用下面的）
