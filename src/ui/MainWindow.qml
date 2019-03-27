@@ -24,11 +24,11 @@ ApplicationWindow {
             ScrollView {
                 anchors.left: parent.left
                 anchors.right: rightButtons.left
+                height: 64
                 clip: true
 
                 RowLayout {
-                    anchors.fill: parent
-
+                    height: 64
                     Repeater {
                         model: _toolBarController.devices
 
@@ -38,6 +38,7 @@ ApplicationWindow {
                             icon.source: _toolButtonController.iconUrl
                             checkable: true
                             ButtonGroup.group: toolButtonGround
+                            Layout.alignment: Qt.AlignVCenter
 
                             Component.onCompleted: {
                                 if (index == 0){
@@ -59,6 +60,7 @@ ApplicationWindow {
             RowLayout {
                 id: rightButtons
                 anchors.right: parent.right
+                height: 64
                 Repeater {
                     model: _toolBarController.others
 
