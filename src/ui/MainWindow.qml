@@ -5,7 +5,7 @@ import QtQuick.Controls 2.12
 
 import SAK.Controls 1.0
 ApplicationWindow {
-    id: window
+    id: root
     width: 1024
     height: 600
     visible:true
@@ -21,33 +21,44 @@ ApplicationWindow {
             width: parent.width
             height: 64
 
-            RowLayout {
-                anchors.fill: parent
+            ScrollView {
+                anchors.left: parent.left
+                anchors.right: rightButtons.left
+                clip: true
 
-                Repeater {
-                    model: _toolBarController.devices
+                RowLayout {
+                    anchors.fill: parent
 
-                    ToolButton {
-                        height: 64
-                        text: _toolButtonController.title
-                        icon.source: _toolButtonController.iconUrl
-                        checkable: true
-                        ButtonGroup.group: toolButtonGround
+                    Repeater {
+                        model: _toolBarController.devices
 
-                        Component.onCompleted: {
-                            if (index == 0){
-                                checked = true
+                        ToolButton {
+                            height: 64
+                            text: _toolButtonController.title
+                            icon.source: _toolButtonController.iconUrl
+                            checkable: true
+                            ButtonGroup.group: toolButtonGround
+
+                            Component.onCompleted: {
+                                if (index == 0){
+                                    checked = true
+                                }
                             }
-                        }
 
-                        property ToolButtonController _toolButtonController: modelData
+                            property ToolButtonController _toolButtonController: modelData
+                        }
+                    }
+
+                    Item {
+                        height: 1
+                        Layout.fillWidth: true
                     }
                 }
+            }
 
-                Item {
-                    Layout.fillWidth: true
-                }
-
+            RowLayout {
+                id: rightButtons
+                anchors.right: parent.right
                 Repeater {
                     model: _toolBarController.others
 
