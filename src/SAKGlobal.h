@@ -18,15 +18,14 @@ public:
     SAKGlobal(QObject* parent = nullptr);
 
     enum ToolButtonType {
-        TypeSerialPortAssistant,
-        TypeUdpClient,
-        TypeTcpClient,
-        TypeTcpServer,
-        TypeBlueToothClient,
-        TypeBlueToothServer,
         TypeTool,
         TypeAbout,
-        TypeSetting
+        TypeSetting,
+        TypeTerminal,
+        TypeUdpDebug,
+        TypeTcpDebug,
+        TypeBlueToothDebug,
+        TypeSerialPortDebug
     };
     Q_ENUM(ToolButtonType)
 };

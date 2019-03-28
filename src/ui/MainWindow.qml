@@ -11,6 +11,7 @@ ApplicationWindow {
     visible:true
 
     property ToolBarController _toolBarController: SAKApp.toolBarController
+    property string _centerAreaPageUrl: ""
 
     ButtonGroup {id: toolButtonGround}
 
@@ -18,14 +19,17 @@ ApplicationWindow {
         anchors.fill: parent
 
         Item {
+            id: toolBar
             width: parent.width
             height: 64
 
             ScrollView {
                 anchors.left: parent.left
                 anchors.right: rightButtons.left
-                height: 64
+                height: parent.height
                 clip: true
+                ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+                ScrollBar.vertical.interactive: false
 
                 RowLayout {
                     height: 64
@@ -33,20 +37,25 @@ ApplicationWindow {
                         model: _toolBarController.devices
 
                         ToolButton {
-                            height: 64
+                            id: toolButton
                             text: _toolButtonController.title
                             icon.source: _toolButtonController.iconUrl
                             checkable: true
                             ButtonGroup.group: toolButtonGround
                             Layout.alignment: Qt.AlignVCenter
 
+                            property ToolButtonController _toolButtonController: modelData
+
                             Component.onCompleted: {
                                 if (index == 0){
                                     checked = true
+                                    _centerAreaPageUrl = _toolButtonController.pageUrl
                                 }
                             }
 
-                            property ToolButtonController _toolButtonController: modelData
+                            onClicked: {
+                                _centerAreaPageUrl = _toolButtonController.pageUrl
+                            }
                         }
                     }
 
@@ -63,15 +72,17 @@ ApplicationWindow {
                 height: 64
                 Repeater {
                     model: _toolBarController.others
-
                     ToolButton {
-                        height: 64
                         text: _toolButtonController.title
                         icon.source: _toolButtonController.iconUrl
                         checkable: true
                         ButtonGroup.group: toolButtonGround
 
                         property ToolButtonController _toolButtonController: modelData
+
+                        onClicked: {
+                            _centerAreaPageUrl = _toolButtonController.pageUrl
+                        }
                     }
                 }
             }
@@ -82,5 +93,20 @@ ApplicationWindow {
                 anchors.bottom: parent.bottom
             }
         }   /// Item (ToolBar)
+
+
+        Item {
+            id: centerArea
+
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: toolBar.bottom
+            anchors.bottom: parent.bottom
+
+            Loader {
+                anchors.fill: parent
+                source: _centerAreaPageUrl
+            }
+        }
     }
  }

@@ -28,22 +28,17 @@ void SAKToolBar::initDevices()
 {
     SAKToolButton* button = nullptr;
 
-    button = new SAKToolButton(SAKGlobal::TypeTcpClient, this);
+    button = new SAKToolButton(SAKGlobal::TypeTcpDebug, this);
     _devicesToolButton.append(button);
 
-    button = new SAKToolButton(SAKGlobal::TypeTcpServer, this);
+
+    button = new SAKToolButton(SAKGlobal::TypeUdpDebug, this);
     _devicesToolButton.append(button);
 
-    button = new SAKToolButton(SAKGlobal::TypeUdpClient, this);
+    button = new SAKToolButton(SAKGlobal::TypeBlueToothDebug, this);
     _devicesToolButton.append(button);
 
-    button = new SAKToolButton(SAKGlobal::TypeBlueToothClient, this);
-    _devicesToolButton.append(button);
-
-    button = new SAKToolButton(SAKGlobal::TypeBlueToothServer, this);
-    _devicesToolButton.append(button);
-
-    button = new SAKToolButton(SAKGlobal::TypeSerialPortAssistant, this);
+    button = new SAKToolButton(SAKGlobal::TypeSerialPortDebug, this);
     _devicesToolButton.append(button);
 
     QVariant temp;
@@ -58,6 +53,9 @@ void SAKToolBar::initOthers()
     SAKToolButton* button = nullptr;
 
     button = new SAKToolButton(SAKGlobal::TypeTool, this);
+    _othersToolButton.append(button);
+
+    button = new SAKToolButton(SAKGlobal::TypeTerminal, this);
     _othersToolButton.append(button);
 
     button = new SAKToolButton(SAKGlobal::TypeSetting, this);

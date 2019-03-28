@@ -11,7 +11,7 @@ QT += core gui xml widgets network quickcontrols2 quickwidgets
 # 软件版本号
 #DEFINES += SAK_VERSION=\"\\\"2.0.0\\\"\"
 
-TARGET = QtSwissArmyKnife
+TARGET = QtSAK
 
 TEMPLATE = app
 

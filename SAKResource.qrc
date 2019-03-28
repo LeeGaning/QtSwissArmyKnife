@@ -8,9 +8,16 @@
         <file alias="setting.png">resource/images/setting.png</file>
         <file alias="tool.png">resource/images/tool.png</file>
         <file alias="about.png">resource/images/about.png</file>
+        <file alias="terminal.png">resource/images/terminal.png</file>
+        <file alias="tcp.png">resource/images/tcp.png</file>
+        <file alias="udp.png">resource/images/udp.png</file>
     </qresource>
     <qresource prefix="/qml">
         <file alias="MainWindow.qml">src/ui/MainWindow.qml</file>
+        <file alias="About.qml">src/ui/About.qml</file>
+        <file alias="Setting.qml">src/ui/Setting.qml</file>
+        <file alias="Terminal.qml">src/ui/Terminal.qml</file>
+        <file alias="Tools.qml">src/ui/Tools.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>qtquickcontrols2.conf</file>
