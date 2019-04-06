@@ -25,42 +25,42 @@ void SAKToolButton::init()
     case SAKGlobal::TypeTool:
         _iconUrl = "qrc:/images/tool.png";
         _title = tr("工具");
-        _pageUrl = "qrc:/qml/Tools.qml";
+        _pageUrl = "qrc:/ui/Tools.qml";
         break;
     case SAKGlobal::TypeAbout:
         _iconUrl = "qrc:/images/about.png";
         _title = tr("关于");
-        _pageUrl = "qrc:/qml/About.qml";
+        _pageUrl = "qrc:/ui/about/About.qml";
         break;
     case SAKGlobal::TypeSetting:
         _iconUrl = "qrc:/images/setting.png";
         _title = tr("设置");
-        _pageUrl = "qrc:/qml/Setting.qml";
+        _pageUrl = "qrc:/ui/Setting.qml";
         break;
     case SAKGlobal::TypeTerminal:
         _iconUrl = "qrc:/images/terminal.png";
         _title = tr("终端");
-        _pageUrl = "qrc:/qml/Terminal.qml";
+        _pageUrl = "qrc:/ui/Terminal.qml";
         break;
     case SAKGlobal::TypeUdpDebug:
         _iconUrl = "qrc:/images/udp.png";
         _title = tr("UDP");
-        _pageUrl = "qrc:/qml/Tools.qml";
+        _pageUrl = "qrc:/ui/Tools.qml";
         break;
     case SAKGlobal::TypeTcpDebug:
         _iconUrl = "qrc:/images/tcp.png";
         _title = tr("TCP");
-        _pageUrl = "qrc:/qml/About.qml";
+        _pageUrl = "qrc:/ui/about/About.qml";
         break;
     case SAKGlobal::TypeBlueToothDebug:
         _iconUrl = "qrc:/images/bluetooth.png";
         _title = tr("蓝牙");
-        _pageUrl = "qrc:/qml/Setting.qml";
+        _pageUrl = "qrc:/ui/Setting.qml";
         break;
     case SAKGlobal::TypeSerialPortDebug:
         _iconUrl = "qrc:/images/serialport.png";
         _title = tr("串口");
-        _pageUrl = "qrc:/qml/Terminal.qml";
+        _pageUrl = "qrc:/ui/Terminal.qml";
         break;
     }
 }

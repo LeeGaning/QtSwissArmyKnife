@@ -30,14 +30,16 @@ HEADERS += \
     src/SAKApplication.h \
     src/SAKToolBar.h \
     src/SAKToolButton.h \
-    src/SAKGlobal.h
+    src/SAKGlobal.h \
+    src/ui/about/About.hpp
 
 SOURCES += \
     src/main.cpp \
     src/SAKApplication.cpp \
     src/SAKToolBar.cpp \
     src/SAKToolButton.cpp \
-    src/SAKGlobal.cpp
+    src/SAKGlobal.cpp \
+    src/ui/about/About.cpp
 
 INCLUDEPATH += \
     src \

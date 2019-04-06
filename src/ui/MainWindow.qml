@@ -18,10 +18,10 @@ ApplicationWindow {
     Item {
         anchors.fill: parent
 
-        Item {
+        ToolBar {
             id: toolBar
             width: parent.width
-            height: 64
+            height: 48
 
             ScrollView {
                 anchors.left: parent.left
@@ -32,7 +32,7 @@ ApplicationWindow {
                 ScrollBar.vertical.interactive: false
 
                 RowLayout {
-                    height: 64
+                    height: toolBar.height
                     Repeater {
                         model: _toolBarController.devices
 
@@ -69,7 +69,7 @@ ApplicationWindow {
             RowLayout {
                 id: rightButtons
                 anchors.right: parent.right
-                height: 64
+                height: toolBar.height
                 Repeater {
                     model: _toolBarController.others
                     ToolButton {
@@ -85,12 +85,6 @@ ApplicationWindow {
                         }
                     }
                 }
-            }
-
-            Rectangle {
-                width: parent.width
-                height: 1
-                anchors.bottom: parent.bottom
             }
         }   /// Item (ToolBar)
 

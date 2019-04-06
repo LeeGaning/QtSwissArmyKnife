@@ -50,7 +50,7 @@ void SAKApplication::installUI()
     qDebug() << QQuickStyle::availableStyles();
     QQuickStyle::setStyle("Material");
 
-    qmlAppEngine.load(QUrl("qrc:/qml/MainWindow.qml"));
+    qmlAppEngine.load(QUrl("qrc:/ui/MainWindow.qml"));
 }
 
 void SAKApplication::registerQmlType()

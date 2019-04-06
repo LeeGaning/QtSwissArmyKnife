@@ -12,12 +12,12 @@
         <file alias="tcp.png">resource/images/tcp.png</file>
         <file alias="udp.png">resource/images/udp.png</file>
     </qresource>
-    <qresource prefix="/qml">
+    <qresource prefix="/ui">
         <file alias="MainWindow.qml">src/ui/MainWindow.qml</file>
-        <file alias="About.qml">src/ui/About.qml</file>
         <file alias="Setting.qml">src/ui/Setting.qml</file>
         <file alias="Terminal.qml">src/ui/Terminal.qml</file>
         <file alias="Tools.qml">src/ui/Tools.qml</file>
+        <file alias="about/About.qml">src/ui/about/About.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>qtquickcontrols2.conf</file>
