@@ -9,14 +9,14 @@ import SAK.Controls 1.0
 Item {
     id: root
 
+    About {id: _aboutController}
+
     ScrollView {
         width: parent.width
         height: parent.height
         clip: true
 
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-//        ScrollBar.horizontal.interactive: false
-//        ScrollBar.vertical.interactive: false
 
         ColumnLayout {
             width: root.width
@@ -25,21 +25,56 @@ Item {
             Item {width: 1; height: 1}
 
             Repeater {
-                model: 10
+                model: _aboutController.categories
 
                 GroupBox {
                     id: groupBox
-                    title: qsTr("关于")
-
+                    title: modelData
                     Layout.preferredWidth: root.width*0.7
                     Layout.alignment: Qt.AlignHCenter
 
-                    ColumnLayout {
+                    property string category: modelData
+
+                    Grid {
                         anchors.fill: parent
-                        CheckBox { text: qsTr("E-mail") }
-                        CheckBox { text: qsTr("Calendar") }
-                        CheckBox { text: qsTr("Contactdddddddddddddddddddddddddddddds") }
+                        columns: 3
+                        columnSpacing: 10
+                        rowSpacing: 10
+
+                        Repeater {
+                            id: items
+                            model: _aboutController.items(groupBox.category)
+
+                            Label {
+                                text: modelData
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    visible: _aboutController.isButton(modelData)
+                                    cursorShape: Qt.PointingHandCursor
+
+                                    onClicked: {
+                                        if (_aboutController.isButton(modelData)){
+                                            _aboutController.executeAction(modelData, items.model[index-1])
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
+                }
+            }
+
+            GroupBox {
+                title: _aboutController.historyTitle
+                Layout.preferredWidth: root.width*0.7
+                Layout.alignment: Qt.AlignHCenter
+
+                TextArea {
+                    Layout.columnSpan: 3
+                    text: _aboutController.history
+                    readOnly: true
+                    selectByMouse: true
                 }
             }
         }

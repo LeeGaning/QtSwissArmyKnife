@@ -13,6 +13,7 @@
 #include "SAKApplication.h"
 #include "SAKToolBar.h"
 #include "SAKToolButton.h"
+#include "About.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -55,6 +56,7 @@ void SAKApplication::installUI()
 
 void SAKApplication::registerQmlType()
 {
+    qmlRegisterType<About>("SAK.Controls", 1, 0, "About");
     qmlRegisterSingletonType<SAKApplication>    ("SAK.Controls", 1, 0, "SAKApp", applicationInstance);
 
     qmlRegisterUncreatableType<SAKToolBar>      ("SAK.Controls", 1, 0, "ToolBarController", "Can not create the qml type that named SAKToolBar");

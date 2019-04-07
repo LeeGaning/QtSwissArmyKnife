@@ -43,7 +43,8 @@ SOURCES += \
 
 INCLUDEPATH += \
     src \
-    src/ui
+    src/ui \
+    src/ui/about
 
 win32 {
     RC_ICONS = windows.ico
