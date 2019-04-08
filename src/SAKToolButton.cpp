@@ -40,7 +40,7 @@ void SAKToolButton::init()
     case SAKGlobal::TypeTerminal:
         _iconUrl = "qrc:/images/terminal.png";
         _title = tr("终端");
-        _pageUrl = "qrc:/ui/Terminal.qml";
+        _pageUrl = "qrc:/ui/terminal/Terminal.qml";
         break;
     case SAKGlobal::TypeUdpDebug:
         _iconUrl = "qrc:/images/udp.png";
@@ -60,7 +60,7 @@ void SAKToolButton::init()
     case SAKGlobal::TypeSerialPortDebug:
         _iconUrl = "qrc:/images/serialport.png";
         _title = tr("串口");
-        _pageUrl = "qrc:/ui/Terminal.qml";
+        _pageUrl = "qrc:/ui/terminal/Terminal.qml";
         break;
     }
 }
