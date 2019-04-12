@@ -10,63 +10,109 @@
 #pragma execution_character_set("utf-8")
 #endif
 
-#include <QVariant>
-#include <QDebug>
-
+#include "AppMessageManager.hpp"
+#include "AppMessageOutput.hpp"
 #include "SAKGlobal.h"
-#include "SAKToolBar.h"
-#include "SAKToolButton.h"
+#include "AppMessage.hpp"
 
-SAKToolBar::SAKToolBar(QObject* parent)
+#include <QFile>
+#include <QDateTime>
+#include <QQmlEngine>
+
+QObject *appMessageManagerSingleton(QQmlEngine *qmlEngine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(qmlEngine);
+    Q_UNUSED(jsEngine);
+
+    return AppMessageManager::instance;
+}
+
+AppMessageManager* AppMessageManager::instance = nullptr;
+AppMessageManager::AppMessageManager(QObject *parent)
     :QObject (parent)
+    ,appMessageOutput (nullptr)
 {
-    initDevices();
-    initOthers();
+    instance = this;
+
+    qmlRegisterUncreatableType<AppMessage>  ("SAK.Controls", 1, 0, "AppMessage", "Uncreatable object(AppMessage).");
+    qmlRegisterSingletonType<AppMessageManager>  ("SAK.Controls", 1, 0, "AppMessageManager", appMessageManagerSingleton);
+
+    appMessageOutput = new AppMessageOutput;
+    connect(this, &AppMessageManager::outputMessage, appMessageOutput, &AppMessageOutput::outputMessage);
+    appMessageOutput->start();
 }
 
-void SAKToolBar::initDevices()
+void AppMessageManager::messageRedirection(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    SAKToolButton* button = nullptr;
-
-    button = new SAKToolButton(SAKGlobal::TypeTcpDebug, this);
-    _devicesToolButton.append(button);
-
-
-    button = new SAKToolButton(SAKGlobal::TypeUdpDebug, this);
-    _devicesToolButton.append(button);
-
-    button = new SAKToolButton(SAKGlobal::TypeBlueToothDebug, this);
-    _devicesToolButton.append(button);
-
-    button = new SAKToolButton(SAKGlobal::TypeSerialPortDebug, this);
-    _devicesToolButton.append(button);
-
-    QVariant temp;
-    for(auto var:_devicesToolButton){
-        temp = QVariant::fromValue(var);
-        _devices.append(temp);
-    }
+    if (instance){
+        instance->addMessage(type, context, msg);
+        emit instance->cookingMsg(type, context, msg);
+    }  
 }
 
-void SAKToolBar::initOthers()
+void AppMessageManager::cookingMsg(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    SAKToolButton* button = nullptr;
+    QString category = qtMsgTypeString(type);
 
-    button = new SAKToolButton(SAKGlobal::TypeTool, this);
-    _othersToolButton.append(button);
+    QString log = QDateTime::currentDateTime().toString("yyyyMMdd-hh:mm:ss");
+    log.append(" ");
+    log.append(QString(category));
+    log.append(" ");
+    log.append(context.category);
+    log.append(":");
+    log.append(msg);
 
-    button = new SAKToolButton(SAKGlobal::TypeTerminal, this);
-    _othersToolButton.append(button);
+    emit outputMessage(log);
+}
 
-    button = new SAKToolButton(SAKGlobal::TypeSetting, this);
-    _othersToolButton.append(button);
-
-    button = new SAKToolButton(SAKGlobal::TypeAbout, this);
-    _othersToolButton.append(button);
-
-    QVariant temp;
-    for(auto var:_othersToolButton){
-        temp = QVariant::fromValue(var);
-        _others.append(temp);
+QString AppMessageManager::qtMsgTypeString(QtMsgType type)
+{
+    QString string;
+    switch (type) {
+    case QtDebugMsg:
+        string = QString("QtDebugMsg");
+        break;
+    case QtInfoMsg:
+        string =  QString("QtInfoMsg");
+        break;
+    case QtWarningMsg:
+        string = QString("QtWarningMsg");
+        break;
+    case QtCriticalMsg:
+        string = QString("QtCriticalMsg");
+        break;
+    case QtFatalMsg:
+        string = QString("QtFatalMsg");
+        break;
     }
+
+    string.resize(12, ' ');
+    string.prepend("[");
+    string.append("]");
+
+    return string;
+}
+
+void AppMessageManager::addMessage(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    while (_appMessages.length() > 500) {
+        AppMessage *msgTemp = _appMessages.takeLast();
+        msgTemp->deleteLater();
+    }
+
+    AppMessage *msgPtr = new AppMessage(type, context, msg, this);
+    _appMessages.prepend(msgPtr);
+    emit appMessagesChanged();
+}
+
+QVariantList AppMessageManager::appMessages()
+{
+    QVariantList list;
+
+    for (auto var:_appMessages){
+        QVariant temp = QVariant::fromValue(var);
+        list.append(temp);
+    }
+
+    return list;
 }

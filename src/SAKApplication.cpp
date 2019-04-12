@@ -14,6 +14,7 @@
 #include "SAKToolBar.h"
 #include "SAKToolButton.h"
 #include "About.hpp"
+#include "AppMessageManager.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -31,11 +32,15 @@ SAKApplication* sakApp(){return SAKApplication::instance();}
 
 SAKApplication* SAKApplication::_app = nullptr;
 SAKApplication::SAKApplication(int argc, char **argv)
-    :QApplication(argc, argv)
-    ,toolBar(nullptr)
+    :QApplication (argc, argv)
+    ,toolBar (nullptr)
+    ,messageManager (nullptr)
 {
     _app = this;
     toolBar = new SAKToolBar(this);
+
+    messageManager = new AppMessageManager;
+
     registerQmlType();
     /// --------------------------------------
     installUI();

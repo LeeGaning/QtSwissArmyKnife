@@ -14,6 +14,7 @@
 #include <QQmlApplicationEngine>
 
 class SAKToolBar;
+class AppMessageManager;
 
 class SAKApplication:public QApplication
 {
@@ -28,8 +29,10 @@ public:
 private:
     static SAKApplication* _app;
 
-    SAKToolBar* toolBar;
-    SAKToolBar* toolBarController(){return toolBar;}
+    SAKToolBar *toolBar;
+    SAKToolBar *toolBarController(){return toolBar;}
+
+    AppMessageManager *messageManager;
 
     QQmlApplicationEngine qmlAppEngine;
 private:

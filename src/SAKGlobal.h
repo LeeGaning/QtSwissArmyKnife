@@ -28,6 +28,12 @@ public:
         TypeSerialPortDebug
     };
     Q_ENUM(ToolButtonType)
+
+    /**
+     * @brief logFile   -- 获取日志文件（全路径）
+     * @return          -- 日志文件全路径
+     */
+    static QString logFile();
 };
 
 #endif

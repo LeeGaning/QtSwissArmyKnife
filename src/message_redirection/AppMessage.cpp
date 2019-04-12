@@ -10,63 +10,32 @@
 #pragma execution_character_set("utf-8")
 #endif
 
-#include <QVariant>
-#include <QDebug>
+#include "AppMessage.hpp"
+#include <QDateTime>
 
-#include "SAKGlobal.h"
-#include "SAKToolBar.h"
-#include "SAKToolButton.h"
-
-SAKToolBar::SAKToolBar(QObject* parent)
+AppMessage::AppMessage(QtMsgType type, const QMessageLogContext &context, const QString &msg, QObject *parent)
     :QObject (parent)
 {
-    initDevices();
-    initOthers();
+    _msgColor = messageColor(type);
+    _msg = QString(context.category) + ":" + msg;
+    _msgTime = QDateTime::currentDateTime().toString("hh:mm:ss");
+    _timeColor = QString("silver");
 }
 
-void SAKToolBar::initDevices()
+QString AppMessage::messageColor(QtMsgType type)
 {
-    SAKToolButton* button = nullptr;
-
-    button = new SAKToolButton(SAKGlobal::TypeTcpDebug, this);
-    _devicesToolButton.append(button);
-
-
-    button = new SAKToolButton(SAKGlobal::TypeUdpDebug, this);
-    _devicesToolButton.append(button);
-
-    button = new SAKToolButton(SAKGlobal::TypeBlueToothDebug, this);
-    _devicesToolButton.append(button);
-
-    button = new SAKToolButton(SAKGlobal::TypeSerialPortDebug, this);
-    _devicesToolButton.append(button);
-
-    QVariant temp;
-    for(auto var:_devicesToolButton){
-        temp = QVariant::fromValue(var);
-        _devices.append(temp);
+    QString string;
+    switch (type) {
+    case QtDebugMsg:
+    case QtInfoMsg:
+        string =  QString("green");
+        break;
+    case QtWarningMsg:
+    case QtCriticalMsg:
+    case QtFatalMsg:
+        string = QString("red");
+        break;
     }
-}
 
-void SAKToolBar::initOthers()
-{
-    SAKToolButton* button = nullptr;
-
-    button = new SAKToolButton(SAKGlobal::TypeTool, this);
-    _othersToolButton.append(button);
-
-    button = new SAKToolButton(SAKGlobal::TypeTerminal, this);
-    _othersToolButton.append(button);
-
-    button = new SAKToolButton(SAKGlobal::TypeSetting, this);
-    _othersToolButton.append(button);
-
-    button = new SAKToolButton(SAKGlobal::TypeAbout, this);
-    _othersToolButton.append(button);
-
-    QVariant temp;
-    for(auto var:_othersToolButton){
-        temp = QVariant::fromValue(var);
-        _others.append(temp);
-    }
+    return string;
 }

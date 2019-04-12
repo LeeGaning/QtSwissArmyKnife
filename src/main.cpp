@@ -11,17 +11,26 @@
 #include <QMessageLogContext>
 #include <QDateTime>
 #include <QDebug>
-#include <stdio.h>
-#include <stdlib.h>
 #include <QSettings>
+#include <QLoggingCategory>
+
+#include "AppMessageManager.hpp"
 
 int main(int argc, char *argv[])
 {
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-#if 0
-    qInstallMessageHandler(SAKAppMsgOutput);
+    /*
+     * debug版本直不重定向消息，release版本将消息输出到UI显示并保存到日志文件
+     */
+#if 1
+    qInstallMessageHandler(AppMessageManager::messageRedirection);
 #endif
-    SAKApplication a(argc, argv);
 
+    /*
+     * 启用高分屏适配
+     */
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+    SAKApplication a(argc, argv);
+    qInfo("Application started!");
     return a.exec();
 }

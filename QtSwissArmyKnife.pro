@@ -31,6 +31,9 @@ HEADERS += \
     src/SAKToolBar.h \
     src/SAKToolButton.h \
     src/SAKGlobal.h \
+    src/message_redirection/AppMessage.hpp \
+    src/message_redirection/AppMessageManager.hpp \
+    src/message_redirection/AppMessageOutput.hpp \
     src/ui/about/About.hpp
 
 SOURCES += \
@@ -39,12 +42,16 @@ SOURCES += \
     src/SAKToolBar.cpp \
     src/SAKToolButton.cpp \
     src/SAKGlobal.cpp \
+    src/message_redirection/AppMessage.cpp \
+    src/message_redirection/AppMessageManager.cpp \
+    src/message_redirection/AppMessageOutput.cpp \
     src/ui/about/About.cpp
 
 INCLUDEPATH += \
     src \
     src/ui \
-    src/ui/about
+    src/ui/about \
+    src/message_redirection
 
 win32 {
     RC_ICONS = windows.ico

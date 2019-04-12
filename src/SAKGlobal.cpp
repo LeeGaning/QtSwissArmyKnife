@@ -12,8 +12,18 @@
 
 #include "SAKGlobal.h"
 
+#include <QStandardPaths>
+
 SAKGlobal::SAKGlobal(QObject* parent)
     :QObject (parent)
 {
 
+}
+
+QString SAKGlobal::logFile()
+{
+    QString fileName = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
+    fileName.append("/");
+    fileName.append("SAKLog.txt");
+    return fileName;
 }
