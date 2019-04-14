@@ -28,7 +28,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     src/main.cpp \
-    src/mainwindow/mainwindow.cpp \
+    src/MainWindow/mainwindow.cpp \
     src/SAKApplication.cpp \
     src/TabPage/SAKIODeviceWidget.cpp \
     src/TabPage/SAKIODevice.cpp \
@@ -39,11 +39,11 @@ SOURCES += \
     src/TabPage/SAKHighlighterSettingPanel.cpp \
     src/TabPage/SAKHighlighterLabel.cpp \
     src/TabPage/RWParameter.cpp \
-    src/mainwindow/SAKVersion.cpp \
-    src/mainwindow/MoreInformation.cpp
+    src/MainWindow/SAKVersion.cpp \
+    src/MainWindow/MoreInformation.cpp
 
 HEADERS += \
-    src/mainwindow/mainwindow.h \
+    src/MainWindow/mainwindow.h \
     src/SAKApplication.h \
     src/TabPage/SAKIODeviceWidget.h \
     src/TabPage/SAKIODevice.h \
@@ -54,24 +54,24 @@ HEADERS += \
     src/TabPage/SAKHighlighterSettingPanel.h \
     src/TabPage/SAKHighlighterLabel.h \
     src/TabPage/RWParameter.h \
-    src/mainwindow/SAKVersion.h \
-    src/mainwindow/MoreInformation.h
+    src/MainWindow/SAKVersion.h \
+    src/MainWindow/MoreInformation.h
 
 FORMS += \
-    src/mainwindow/mainwindow.ui \
+    src/MainWindow/mainwindow.ui \
     src/TabPage/SAKIODeviceWidget.ui \
     src/TabPage/AutoResponseItem.ui \
     src/TabPage/AutoResponseSettingPanel.ui \
     src/TabPage/SAKHighlighterSettingPanel.ui \
     src/TabPage/SAKHighlighterLabel.ui \
     src/TabPage/RWParameter.ui \
-    src/mainwindow/SAKVersion.ui \
-    src/mainwindow/MoreInformation.ui
+    src/MainWindow/SAKVersion.ui \
+    src/MainWindow/MoreInformation.ui
 
 INCLUDEPATH += \
     src \
-    src/mainwindow \
-    src/mainwindow/common \
+    src/MainWindow \
+    src/MainWindow/common \
     src/UdpClient \
     src/TcpClient \
     src/TcpServer \
